@@ -14,7 +14,7 @@ const initialState = {
 const INCREMENT = "increment"
 const DECREMENT = "decrement"
 
-//@ create a action for increament and decreament function which is reurn a object
+//@ create a action for increament and decreament function which is return a object
 
 //* action creator :-
 const increamentValue = (value) => {

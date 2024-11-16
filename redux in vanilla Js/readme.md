@@ -235,3 +235,84 @@ console.log(state.value) // 20
 
 - Redex never mutate the value of main **state** .
 - [Mutability vs Immutability in JavaScript. Click here to learn more...](https://www.freecodecamp.org/news/mutability-vs-immutability-in-javascript/)
+
+### Write a reducer function vanilla javascript .
+
+**First we create a actionArray, Which have 5 element**
+
+```js
+const actionArray = [
+  { type: "increment", payLoad: 1 },
+  { type: "increment", payLoad: 1 },
+  { type: "increment", payLoad: 1 },
+  { type: "decrement", payLoad: 1 },
+  { type: "decrement", payLoad: 1 },
+]
+```
+
+**Create a defaultState obj**
+
+```js
+const defaultState = {
+  value: 1,
+}
+```
+
+**Create a createReducer func and pass this two peremeter**
+
+- **state** and **action**
+  - here **state** === **defaultState** obj
+  - **action** === **actionArray**
+
+```js
+const createReducre = (state, action) => {
+  if (action.type === "increment") {
+    return {
+      ...state,
+      value: state.value + action.payLoad,
+    }
+  } else if (action.type === "decrement") {
+    return {
+      ...state,
+      value: state.value - action.payLoad,
+    } else {
+    return { ...state }
+  }
+ }
+}
+```
+
+**Pass the createReducer function and defaultState as a argument of _action.reducer()_**
+
+```js
+const finalResult = actionArray.reduce(createReducre, defaultState)
+console.log(finalResult) //# {value: 2}
+// defaultState = 1 , increment = 3 , decrement = 2
+// 1 + 3 - 2 = 2
+```
+
+- in reduce function every time our **defaultState** is calculated .
+
+#### We also do the whole same thing in that way :-
+
+```js
+const finalResult = actionArray.reduce(
+  (state, action) => {
+    if (action.type === "increment") {
+      return {
+        ...state,
+        value: state.value + action.payLoad,
+      }
+    } else if (action.type === "decrement") {
+      return {
+        ...state,
+        value: state.value + action.payLoad,
+      }
+    } else {
+      return { ...state }
+    }
+  },
+  { value: 1 }
+)
+console.log(finalResult) //# {value: 2}
+```
