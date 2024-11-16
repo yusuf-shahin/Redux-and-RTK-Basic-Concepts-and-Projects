@@ -134,3 +134,104 @@ function render() {
 }
 render()
 ```
+
+### We also add payLoad inside our _dispatch_ method obj, it help us to control our increment and decrement
+
+```jsx
+increment.addEventListener("click", () => {
+  store.dispatch({ type: "increment", payLoad: 3 })
+})
+
+decrement.addEventListener("click", () => {
+  store.dispatch({ type: "decrement", payLoad: 3 })
+})
+```
+
+- here we set that in everytime our state increase and decrease by 3
+
+**in createReducer func**
+
+```jsx
+const createReducer = (state = initialState, action) => {
+  //@ action come from dispatch addEventListener
+  if (action.type === "increment") {
+    return {
+      ...state,
+      value: state.value + action.payLoad,
+    }
+  } else if (action.type === "decrement") {
+    return {
+      ...state,
+      value: state.value - action.payLoad,
+    }
+  } else {
+    return state
+  }
+}
+```
+
+### We also create action identifier varible and action creator function which is return a object .
+
+```jsx
+const INCREMENT = "increment"
+const DECREMENT = "decrement"
+
+//* action creator :-
+const increamentValue = (value) => {
+  return { type: INCREMENT, payLoad: value }
+}
+
+const decreamentValue = (value) => {
+  return { type: DECREMENT, payLoad: value }
+}
+```
+
+**invoke those two function inside peremetar of dispatch**
+
+```jsx
+increment.addEventListener("click", () => {
+  store.dispatch(increamentValue(2))
+})
+
+decrement.addEventListener("click", () => {
+  store.dispatch(decreamentValue(2))
+})
+```
+
+### Reducer function :-
+
+- We pass our **reducer** _createReducer_ function inside our **Redux** store . So question is arrive what is the feature of reducer function?
+
+- reducer function take two thing as a peremeter
+
+  - 1. state
+  - 2. action.
+
+  **Here we set the state value === initialState**
+  **Value of action come from dispatch**
+
+- reducer function must be a always pure function . It is never mutate the value of any varible .
+- example of impure function :-
+
+```js
+const state = {
+  value: 0,
+}
+
+const impureFunc = (abc) => {
+  state.value = abc * 2
+}
+
+impure(5)
+console.log(state.value) // 10
+
+impure(5)
+console.log(state.value) // 20
+```
+
+- **Here inpureFunc is mutate the value of state obj and every time the value is change**
+
+### immutibility
+
+- Redex never mutate the value of main **state** .
+- [Mutability vs Immutability in JavaScript. Click here to learn more...](https://www.freecodecamp.org/news/mutability-vs-immutability-in-javascript/)
