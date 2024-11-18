@@ -293,7 +293,7 @@ console.log(finalResult) //# {value: 2}
 
 - in reduce function every time our **defaultState** is calculated .
 
-#### We also do the whole same thing in that way :-
+#### We also do the previous code in that way :-
 
 ```js
 const finalResult = actionArray.reduce(
