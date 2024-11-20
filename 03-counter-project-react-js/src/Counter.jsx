@@ -2,9 +2,12 @@ import React from "react"
 import { useDispatch, useSelector } from "react-redux"
 
 const Counter = () => {
-  const number = useSelector((state) => state.value)
+  //* defaultState
+  const state = useSelector((state) => state)
+
+  //* pass the object for action
   const dispatch = useDispatch()
-  // console.log(number)
+  // console.log(state.value)
 
   return (
     <>
@@ -14,7 +17,7 @@ const Counter = () => {
       >
         -
       </span>
-      <span className='num'>{number}</span>
+      <span className='num'>{state.value}</span>
       <span
         className='increment'
         onClick={() => dispatch({ type: "increment", payload: 5 })}
