@@ -1,14 +1,6 @@
 import { createStore } from "redux"
+import { reducer } from "./reduce"
 
-const createReducer = (state = 5, action) => {
-  switch (action.type) {
-    case "increment":
-      return state + 1
-    case "decrement":
-      return state - 1
-    default:
-      return state
-  }
-}
+const store = createStore(reducer)
 
-export const store = createStore(createReducer)
+export default store
