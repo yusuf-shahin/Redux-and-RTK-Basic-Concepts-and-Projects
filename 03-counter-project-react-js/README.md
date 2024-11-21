@@ -97,14 +97,14 @@ const Counter = () => {
     <>
       <span
         className='decrement'
-        onClick={() => dispatch({ type: "decrement", payload: 3 })}
+        onClick={() => dispatch({ type: "decrement", payload: 1 })}
       >
         -
       </span>
       <span className='num'>{state.value}</span>
       <span
         className='increment'
-        onClick={() => dispatch({ type: "increment", payload: 5 })}
+        onClick={() => dispatch({ type: "increment", payload: 1 })}
       >
         +
       </span>

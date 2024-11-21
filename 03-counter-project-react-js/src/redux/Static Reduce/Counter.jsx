@@ -1,7 +1,7 @@
 import React from "react"
 import { useDispatch, useSelector } from "react-redux"
 
-const Counter = () => {
+const Counter = ({ name }) => {
   //* defaultState
   const state = useSelector((state) => state)
 
@@ -9,18 +9,31 @@ const Counter = () => {
   const dispatch = useDispatch()
   // console.log(state.value)
 
+  //@ dispatch function in a function
+
+  const incrementHandeler = (num) => {
+    dispatch({ type: "increment", payload: num })
+  }
+
+  const decrementHandeler = (num) => {
+    dispatch({ type: "decrement", payload: num })
+  }
+
   return (
     <>
       <span
         className='decrement'
-        onClick={() => dispatch({ type: "decrement", payload: 3 })}
+        // onClick={() => dispatch({ type: "decrement", payload: 1 })}
+        onClick={() => decrementHandeler(2)}
       >
         -
       </span>
       <span className='num'>{state.value}</span>
+
       <span
         className='increment'
-        onClick={() => dispatch({ type: "increment", payload: 5 })}
+        // onClick={() => dispatch({ type: "increment", payload: 1 })}
+        onClick={() => incrementHandeler(3)}
       >
         +
       </span>
