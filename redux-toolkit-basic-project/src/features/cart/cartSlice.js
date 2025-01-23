@@ -22,8 +22,22 @@ const cartSlice = createSlice({
     },
     removeItem: (state, action) => {
       // console.log(actions)
+      //! payload come from
       const itemId = action.payload
+      //* state is come from initial state
       state.cartItems = state.cartItems.filter((item) => item.id !== itemId)
+    },
+    increment: (state, action) => {
+      const itemId = action.payload
+      const cartItem = state.cartItems.find((item) => item.id === itemId)
+      cartItem.amount++
+    },
+    decrement: (state, action) => {
+      const itemId = action.payload
+      const cartItem = state.cartItems.find((item) => item.id === itemId)
+      // cartItem.amount = cartItem.amount - 1
+      if (cartItem.amount <= 0) return
+      cartItem.amount--
     },
   },
 })
@@ -35,7 +49,11 @@ const cartSlice = createSlice({
 // name: "cart"
 // reducer: ƒ(state, action)
 
-export const { clearCart, removeItem } = cartSlice.actions
+//! pass the action to the component and invoke this function as parameter of usedispatch()
+//? first store useDispatce into a varible name dispatch
+//?
+//? when we invoke the function inside our use
+export const { clearCart, removeItem, increment, decrement } = cartSlice.actions
 
-//! pass it to the storage
+//! pass the reduce to the storage
 export default cartSlice.reducer
