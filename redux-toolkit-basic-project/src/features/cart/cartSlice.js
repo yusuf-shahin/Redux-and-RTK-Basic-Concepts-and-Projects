@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit"
-import cartItems from "../../cartItems"
+import { cartItems } from "../../cartItems"
 
 const initialState = {
+  //@ cartItem is a array of object...
   cartItems: cartItems,
   amount: 1,
   total: 0,
@@ -29,6 +30,8 @@ const cartSlice = createSlice({
     },
     increment: (state, action) => {
       const itemId = action.payload
+      // action.payload === id
+      // action.payload basically help us to reach the data from component
       const cartItem = state.cartItems.find((item) => item.id === itemId)
       cartItem.amount++
     },
@@ -39,21 +42,28 @@ const cartSlice = createSlice({
       if (cartItem.amount <= 0) return
       cartItem.amount--
     },
+    calculateTotals: (state) => {
+      let amount = 0
+      let total = 0
+      state.cartItems.forEach((item) => {
+        amount += item.amount
+        total += item.amount * item.price
+      })
+      //
+      state.amount = amount
+      state.total = total
+    },
   },
 })
 
 //? console.log(cartSlice)
-// actions: {}
-// caseReducers: {}
-// getInitialState: ƒ()
-// name: "cart"
-// reducer: ƒ(state, action)
 
 //! pass the action to the component and invoke this function as parameter of usedispatch()
 //? first store useDispatce into a varible name dispatch
 //?
 //? when we invoke the function inside our use
-export const { clearCart, removeItem, increment, decrement } = cartSlice.actions
+export const { clearCart, removeItem, increment, decrement, calculateTotals } =
+  cartSlice.actions
 
 //! pass the reduce to the storage
 export default cartSlice.reducer

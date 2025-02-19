@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux"
 import { ChevronDown, ChevronUp } from "../icons"
 
 const CartItem = ({ id, img, title, price, amount }) => {
+  // create to change state in store
   const dispatch = useDispatch()
   return (
     <article className='cart-item'>

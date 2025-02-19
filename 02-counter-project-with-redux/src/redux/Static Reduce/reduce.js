@@ -1,5 +1,5 @@
 export const defaultState = {
-  value: 3,
+  value: 1,
 }
 
 export const reducer = (state = defaultState, action) => {

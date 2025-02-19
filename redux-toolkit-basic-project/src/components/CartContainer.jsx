@@ -1,10 +1,16 @@
 import { useSelector, useDispatch } from "react-redux"
-import CartItem from "./CartItem"
 import { clearCart } from "../features/cart/cartSlice"
+// card component
+import CartItem from "./CartItem"
 
 const CartContainer = () => {
   const dispatch = useDispatch()
-  const { cartItems, amount, total } = useSelector((store) => store.cart)
+  // console.log(useSelector())
+
+  // get everything from storage
+  const { cartItems, amount, total } = useSelector((store) => {
+    return store.cart
+  })
   if (amount < 1) {
     return (
       <section className='cart'>

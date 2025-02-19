@@ -1,5 +1,9 @@
 # Redux Toolkit
 
+### What does redux-toolkit do ?
+
+- [Learn toclick here...](https://redux.js.org/introduction/why-rtk-is-redux-today#what-does-redux-toolkit-do)
+
 ```sh
 npm install @reduxjs/toolkit react-redux
 ```
@@ -80,7 +84,13 @@ const cartSlice = createSlice({
 })
 
 console.log(cartSlice)
+// actions: {}
+// caseReducers: {}
+// getInitialState: ƒ()
+// name: "cart"
+// reducer: ƒ(state, action)
 
+// pass this reducer to storage
 export default cartSlice.reducer
 ```
 
@@ -104,43 +114,7 @@ export const store = configureStore({
 #### Access store value
 
 - create components/Navbar.js
-
-```js
-import { CartIcon } from "../icons"
-import { useSelector } from "react-redux"
-
-const Navbar = () => {
-  const { amount } = useSelector((state) => state.cart)
-
-  return (
-    <nav>
-      <div className='nav-center'>
-        <h3>redux toolkit</h3>
-        <div className='nav-container'>
-          <CartIcon />
-          <div className='amount-container'>
-            <p className='total-amount'>{amount}</p>
-          </div>
-        </div>
-      </div>
-    </nav>
-  )
-}
-export default Navbar
-```
-
-#### Hero Icons
-
-- [Hero Icons](https://heroicons.com/)
-
-```css
-nav svg {
-  width: 40px;
-  color: var(--clr-white);
-}
-```
-
-#### Setup Cart
+- `import { useSelector } from "react-redux"` help us to select the initial state
 
 - cartSlice.js
 
@@ -164,6 +138,7 @@ import CartItem from "./CartItem"
 import { useSelector } from "react-redux"
 
 const CartContainer = () => {
+  // it is help us to select the value of initialState
   const { cartItems, total, amount } = useSelector((state) => state.cart)
 
   if (amount < 1) {
@@ -205,6 +180,12 @@ const CartContainer = () => {
 
 export default CartContainer
 ```
+
+- in here we basically render our all element
+- all **state** come from store and we get our all state value by `useSelector()` method
+- `const { cartItems, total, amount } = useSelector((state) => state.cart)`
+
+#### Setup Cart
 
 - CartItem.js
 
@@ -252,25 +233,18 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     clearCart: (state) => {
+      // state === initial state
       state.cartItems = []
     },
   },
 })
 
+// pass this action in any component
 export const { clearCart } = cartSlice.actions
 ```
 
-- create action
-
-```js
-const ACTION_TYPE = "ACTION_TYPE"
-
-const actionCreator = (payload) => {
-  return { type: ACTION_TYPE, payload: payload }
-}
-```
-
 - CartContainer.js
+- ` useDispatch()` method help us to exicute the function
 
 ```js
 import React from "react"
@@ -284,6 +258,7 @@ const CartContainer = () => {
     <button
       className='btn clear-btn'
       onClick={() => {
+        // invoke the function inside dispatch
         dispatch(clearCart())
       }}
     >
@@ -304,7 +279,7 @@ import { createSlice } from "@reduxjs/toolkit"
 import cartItems from "../../cartItems"
 
 const initialState = {
-  cartItems: [],
+  cartItems: cartItems,
   amount: 0,
   total: 0,
   isLoading: true,
@@ -318,10 +293,12 @@ const cartSlice = createSlice({
       state.cartItems = []
     },
     removeItem: (state, action) => {
+      // action.payload its come from component
       const itemId = action.payload
       state.cartItems = state.cartItems.filter((item) => item.id !== itemId)
     },
-    increase: (state, { payload }) => {
+    increase: (state, action) => {
+      const itemId = action.payload
       const cartItem = state.cartItems.find((item) => item.id === payload.id)
       cartItem.amount = cartItem.amount + 1
     },
@@ -342,6 +319,7 @@ const cartSlice = createSlice({
   },
 })
 
+// pass this action function in component
 export const { clearCart, removeItem, increase, decrease, calculateTotals } =
   cartSlice.actions
 
@@ -370,6 +348,7 @@ const CartItem = ({ id, img, title, price, amount }) => {
         <button
           className='remove-btn'
           onClick={() => {
+            // removeItem(id) here id === action.payload
             dispatch(removeItem(id))
           }}
         >
@@ -381,7 +360,7 @@ const CartItem = ({ id, img, title, price, amount }) => {
         <button
           className='amount-btn'
           onClick={() => {
-            dispatch(increase({ id }))
+            dispatch(increase(id))
           }}
         >
           <ChevronUp />

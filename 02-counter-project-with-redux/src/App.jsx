@@ -6,9 +6,6 @@ function App() {
       <div className='container'>
         <Counter name={"static"} />
       </div>
-      <div className='container'>
-        <Counter name={"static"} />
-      </div>
     </>
   )
 }

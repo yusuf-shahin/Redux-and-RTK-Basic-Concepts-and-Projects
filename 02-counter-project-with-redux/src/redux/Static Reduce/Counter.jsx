@@ -29,7 +29,6 @@ const Counter = ({ name }) => {
         -
       </span>
       <span className='num'>{state.value}</span>
-
       <span
         className='increment'
         // onClick={() => dispatch({ type: "increment", payload: 1 })}

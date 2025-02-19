@@ -3,7 +3,7 @@ import cartReduce from "../src/features/cart/cartSlice"
 
 export const store = configureStore({
   reducer: {
-    //* initial state are selected by useSelector(s => cart.s)
+    //* initial state are selected by useSelector(s => cart.state)
     cart: cartReduce,
   },
 })
