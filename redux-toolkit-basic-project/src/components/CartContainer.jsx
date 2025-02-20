@@ -4,13 +4,17 @@ import { clearCart } from "../features/cart/cartSlice"
 import CartItem from "./CartItem"
 
 const CartContainer = () => {
+  //@ despatch help us to set the action which is come from Slice
   const dispatch = useDispatch()
   // console.log(useSelector())
 
-  // get everything from storage
+  //* get the initialState from Slice which is store in store.js ...
   const { cartItems, amount, total } = useSelector((store) => {
+    //@ it is help us to delect the state
     return store.cart
   })
+  //? basically our state render from storage, action happen in Slice . For that state of storage is chage by any action...
+
   if (amount < 1) {
     return (
       <section className='cart'>

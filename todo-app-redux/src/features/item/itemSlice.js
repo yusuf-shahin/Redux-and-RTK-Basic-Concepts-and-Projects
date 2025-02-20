@@ -5,11 +5,11 @@ const initialState = {
 }
 
 const todoSlice = createSlice({
-  name: "todos",
+  name: "todos_app",
   initialState,
   reducers: {
     addTodo: (state, action) => {
-      state.todos.push({ id: nanoid(), text: action.payload, completed: false })
+      state.todos = [...state.todos, { text: action.payload, id: nanoid() }]
     },
     toggleTodo: (state, action) => {
       const todo = state.todos.find((todo) => todo.id === action.payload)

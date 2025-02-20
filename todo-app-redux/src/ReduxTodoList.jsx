@@ -44,7 +44,7 @@ const TodoInput = () => {
 }
 
 const TodoItems = () => {
-  const todos = useSelector((state) => state.todos)
+  const { todos } = useSelector((state) => state.todos)
 
   return (
     <div className='space-y-2'>

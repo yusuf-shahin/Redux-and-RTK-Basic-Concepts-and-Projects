@@ -59,11 +59,8 @@ const cartSlice = createSlice({
 //? console.log(cartSlice)
 
 //! pass the action to the component and invoke this function as parameter of usedispatch()
-//? first store useDispatce into a varible name dispatch
-//?
-//? when we invoke the function inside our use
 export const { clearCart, removeItem, increment, decrement, calculateTotals } =
   cartSlice.actions
 
-//! pass the reduce to the storage
+//! pass the reducer to the storage
 export default cartSlice.reducer
