@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import TodoInput from "./Components/TodoInput"
-import TodoItems from "./Components/TodoItems"
+import TodoItems from "./Components/InputItems"
 
 const TodoList = () => {
   const [inputValue, setInputValue] = useState("")

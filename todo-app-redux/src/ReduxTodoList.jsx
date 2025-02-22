@@ -2,6 +2,8 @@ import React, { useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { addTodo, toggleTodo, deleteTodo } from "./features/item/itemSlice"
 
+import { setState } from "./features/item/testSlice"
+
 const ReduxTodoList = () => {
   return (
     <div className='min-h-screen flex flex-col items-center justify-center bg-base-200 p-4'>
@@ -11,6 +13,9 @@ const ReduxTodoList = () => {
         </h1>
         <TodoInput />
         <TodoItems />
+      </div>
+      <div className='mt-10'>
+        <TestComponents />
       </div>
     </div>
   )
@@ -22,10 +27,13 @@ const TodoInput = () => {
 
   const handleAddTodo = () => {
     if (task.trim()) {
+      //@ we get that task in itemSlice.js as payload
       dispatch(addTodo(task))
       setTask("")
     }
   }
+
+  dispatch(setState(task))
 
   return (
     <div className='flex gap-2 mb-4'>
@@ -44,11 +52,11 @@ const TodoInput = () => {
 }
 
 const TodoItems = () => {
-  const { todos } = useSelector((state) => state.todos)
+  const { todoList } = useSelector((state) => state.todos)
 
   return (
     <div className='space-y-2'>
-      {todos.map((todo) => (
+      {todoList.map((todo) => (
         <TodoItem key={todo.id} todo={todo} />
       ))}
     </div>
@@ -82,6 +90,15 @@ const TodoItem = ({ todo }) => {
         Delete
       </button>
     </div>
+  )
+}
+
+const TestComponents = () => {
+  const { stateVarible } = useSelector((state) => state.testState)
+  return (
+    <>
+      <h1 className='text-3xl'>{stateVarible}</h1>
+    </>
   )
 }
 

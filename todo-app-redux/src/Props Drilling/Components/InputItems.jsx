@@ -1,4 +1,4 @@
-import TodoItem from "./InputItems"
+import TodoItem from "./InputItem"
 
 const TodoItems = ({ list, setList }) => {
   return (

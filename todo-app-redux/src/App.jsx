@@ -1,10 +1,10 @@
 import ReduxTodoList from "./ReduxTodoList"
-import TodoList from "./TodoList"
+import PropDrillingTodoList from "./Props Drilling/TodoList"
 
 function App() {
   return (
     <>
-      {/* <TodoList /> */}
+      {/* <PropDrillingTodoList /> */}
       <ReduxTodoList />
     </>
   )

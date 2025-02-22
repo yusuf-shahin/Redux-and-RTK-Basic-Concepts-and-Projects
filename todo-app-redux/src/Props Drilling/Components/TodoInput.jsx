@@ -16,8 +16,8 @@ const TodoInput = ({ inputValue, setInputValue, setList }) => {
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
       />
-      <button className='btn btn-primary' onClick={addItem}>
-        Add
+      <button className='btn btn-square font-bold text-2xl' onClick={addItem}>
+        +
       </button>
     </div>
   )
